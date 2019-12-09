@@ -14,7 +14,7 @@ def main():
 	train_accuracy=[]
 	test_accuracy=[]
 	train_loss=[]
-	with open('C:/Users/Dell/Desktop/cse455/vision-hw5/logs/boring.txt') as f:
+	with open('C:/Users/jkzhang7/Desktop/cse455/hw6/logs/boringnet.txt') as f:
 		for line in f:
 			if 'Final Summary' in line:
 				train_loss.append(float(line[:-1].split(' ')[-1]))

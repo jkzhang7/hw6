@@ -15,7 +15,7 @@ class BaseModel(nn.Module):
         ts = time.time()
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d_%H:%M:%S_log.txt')
         # self.logFile = open('C:/Users/Dell/Desktop/cse455/vision-hw5/logs/' + st, 'w')
-        self.logFile = open('C:/Users/Dell/Desktop/cse455/vision-hw5/logs/boringnet.txt', 'w')
+        self.logFile = open('C:/Users/jkzhang7/Desktop/cse455/hw6/logs/boringnet.txt', 'w')
 
     def log(self, str):
         print(str)
@@ -59,7 +59,9 @@ class BoringNet(BaseModel):
         # TODO: Implement forward pass for BoringNet
         x = x.view(-1, 32 * 32 * 3)
         x = self.fc1(x)
+        x = F.relu(x)
         x = self.fc2(x)
+        x = F.relu(x)
         x = self.fc3(x)
         return x
 
