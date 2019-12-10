@@ -15,7 +15,7 @@ class BaseModel(nn.Module):
         ts = time.time()
         st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d_%H:%M:%S_log.txt')
         # self.logFile = open('C:/Users/Dell/Desktop/cse455/vision-hw5/logs/' + st, 'w')
-        self.logFile = open('C:/Users/jkzhang7/Desktop/cse455/hw6/logs/boringnet.txt', 'w')
+        self.logFile = open('C:/Users/Dell/Desktop/cse455/vision-hw5/logs/learn10.txt', 'w')
 
     def log(self, str):
         print(str)
@@ -69,8 +69,26 @@ class BoringNet(BaseModel):
 class CoolNet(BaseModel):
     def __init__(self):
         super(CoolNet, self).__init__()
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=8, stride=1)
+        self.pool1 = nn.MaxPool2d(2)
+        self.relu1 = nn.ReLU()
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=8, stride=1)
+        self.pool2 = nn.MaxPool2d(2, 1)
+        self.relu2 = nn.ReLU()
+        self.fc1 = nn.Linear(1024, 100)
+        self.fc2 = nn.Linear(100, 10)
+
         # TODO: Define model here
 
     def forward(self, x):
         # TODO: Implement forward pass for CoolNet
+        x = self.conv1(x)
+        x = self.pool1(x)
+        x = self.relu1(x)
+        x = self.conv2(x)
+        x = self.pool2(x)
+        x = self.relu2(x)
+        x = x.view(x.size(0), -1)
+        x = self.fc1(x)
+        x = self.fc2(x)
         return x
